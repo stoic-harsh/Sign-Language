@@ -8,7 +8,7 @@ while(True):
     cv.imshow("Camera", frame)
 
     if(cv.waitKey(1) == ord('q')):
-       break
+        break
 
 vid.release()
 cv.destroyAllWindows()
