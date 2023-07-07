@@ -1,12 +1,13 @@
 import cv2 as cv
 import mediapipe as mp
 
-import util_functions
+import testing_util_functions
 
 mpHands = mp.solutions.hands
 detectHands = mpHands.Hands(max_num_hands=1)
 
 vid = cv.VideoCapture(0)
+
 
 while(True):
     _, frame = vid.read()
@@ -16,10 +17,10 @@ while(True):
     result = detectHands.process(frame_in_RGB)
 
     if(result.multi_hand_landmarks): 
-        X,Y,X2,Y2 = util_functions.bounding_box(frame, result.multi_hand_landmarks)
+        X,Y,X2,Y2 = testing_util_functions.bounding_box(frame, result.multi_hand_landmarks)
 
-        canvas_img = util_functions.cropped_image(frame, X, Y, X2, Y2)
-        
+        testing_util_functions.classify_gesture(frame, X, Y, X2, Y2)
+
 
     cv.imshow("Camera", frame)
 
@@ -27,10 +28,6 @@ while(True):
     
     if(key == ord('q')):
         break
-
-    if(key == ord('s')):
-        dataset = 'B'
-        util_functions.save_image(canvas_img, dataset)
 
 vid.release()
 cv.destroyAllWindows()
