@@ -29,7 +29,7 @@ while(True):
         break
 
     if(key == ord('s')):
-        dataset = 'A'
+        dataset = 'B'
         data_collection_util_functions.save_image(canvas_img, dataset)
 
 vid.release()
